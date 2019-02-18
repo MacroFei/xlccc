@@ -13,4 +13,7 @@
     <select id="total" resultType="int">
          select count(*) from user
     </select>
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="User">
+        INSERT into user ( name ) values ( #{name} )
+    </insert>
 </mapper>

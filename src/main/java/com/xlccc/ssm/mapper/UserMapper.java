@@ -9,4 +9,6 @@ public interface UserMapper {
     public List<User> list(Page page);
 
     public int total();
+
+    void add (User user );
 }
