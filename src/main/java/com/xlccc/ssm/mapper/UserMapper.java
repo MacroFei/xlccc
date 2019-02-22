@@ -1,20 +1,21 @@
 package com.xlccc.ssm.mapper;
 
 import com.xlccc.ssm.pojo.User;
-import com.xlccc.ssm.util.Page;
-
+import com.xlccc.ssm.pojo.UserExample;
 import java.util.List;
 
 public interface UserMapper {
-    public List<User> list();
+    int deleteByPrimaryKey(Integer id);
 
-//    public int total();
+    int insert(User record);
 
-    void add (User user );
+    int insertSelective(User record);
 
-    void delete(int id );
+    List<User> selectByExample(UserExample example);
 
-    User get(int id );
+    User selectByPrimaryKey(Integer id);
 
-    void update(User user);
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }

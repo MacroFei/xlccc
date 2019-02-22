@@ -1,14 +1,15 @@
 package com.xlccc.ssm.pojo;
 
 public class User {
-    private int id ;
-    private String name ;
+    private Integer id;
 
-    public int getId() {
+    private String name;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -17,14 +18,6 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        this.name = name == null ? null : name.trim();
     }
 }
