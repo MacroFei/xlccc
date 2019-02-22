@@ -79,6 +79,8 @@
                 <td>${u.id}</td>
                 <td>${u.name}</td>
                 <td><img height="40px" src="img/user/${u.id}.jpg"></td>
+                <td><a href="admin_user_edit?id=${u.id}">编辑</a></td>
+            </tr>
         </table>
     </c:forEach>
 </div>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -49,18 +50,44 @@ public class UserController {
     }
 
     @RequestMapping("admin_user_delete")
-    public String delete(int id , HttpSession session){
+    public String delete(int id, HttpSession session) {
         userService.delete(id);
-        File imageFolder= new File(session.getServletContext().getRealPath("img/user"));
-        File file = new File(imageFolder,id+".jpg");
-        file .delete();
+        File imageFolder = new File(session.getServletContext().getRealPath("img/user"));
+        File file = new File(imageFolder, id + ".jpg");
+        file.delete();
         return "redirect:/admin_user_list";
     }
 
     @RequestMapping("admin_user_edit")
-    public String edit(int id , Model model){
+    public String edit(int id, Model model) {
         User u = userService.get(id);
-        model.addAttribute("u",u);
+        model.addAttribute("u", u);
         return "admin/editUser";
+    }
+
+    @RequestMapping("admin_user_update")
+    public String update(User u, HttpSession session, UploadedImageFile uploadedImageFile) {
+
+        userService.update(u);
+        MultipartFile image = uploadedImageFile.getImage();
+        if (null != image && !image.isEmpty()){
+            File imageFolder = new File(session.getServletContext().getRealPath("img/user"));
+            File file = new File(imageFolder,u.getId()+".jpg");
+            try {
+                image.transferTo(file);
+            } catch (IOException e) {
+                System.out.print("文件转换错误");
+                e.printStackTrace();
+            }
+            BufferedImage img = ImageUtil.change2jpg(file);
+            try {
+                ImageIO.write(img,"jpg",file);
+            } catch (IOException e) {
+                System.out.print("文件上传错误");
+                e.printStackTrace();
+            }
+        }
+
+        return "redirect:/admin_user_list";
     }
 }

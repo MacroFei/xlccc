@@ -16,4 +16,14 @@
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="User">
         INSERT into user ( name ) values ( #{name} )
     </insert>
+    <delete id="delete">
+        DELETE FROM user WHERE id= #{id}
+    </delete>
+    <select id="get" resultType="User">
+        SELECT * FROM USER WHERE id= #{id}
+    </select>
+
+    <update id="update" parameterType="User">
+        UPDATE user SET NAME=#{name} where id=#{id}
+    </update>
 </mapper>
