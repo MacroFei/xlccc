@@ -11,4 +11,8 @@ public interface UserService {
     int total();
 
     void add(User user);
+
+    void delete (int id );
+
+    User get(int id );
 }

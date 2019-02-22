@@ -33,4 +33,14 @@ public class UserServiceImpl implements UserService {
         userMapper.add(user);
     }
 
+    @Override
+    public void delete(int id) {
+        userMapper.delete(id);
+    }
+
+    @Override
+    public User get(int id) {
+        return userMapper.get(id);
+    }
+
 }

@@ -47,4 +47,20 @@ public class UserController {
         ImageIO.write(img, "jpg", file);
         return "redirect:/admin_user_list";
     }
+
+    @RequestMapping("admin_user_delete")
+    public String delete(int id , HttpSession session){
+        userService.delete(id);
+        File imageFolder= new File(session.getServletContext().getRealPath("img/user"));
+        File file = new File(imageFolder,id+".jpg");
+        file .delete();
+        return "redirect:/admin_user_list";
+    }
+
+    @RequestMapping("admin_user_edit")
+    public String edit(int id , Model model){
+        User u = userService.get(id);
+        model.addAttribute("u",u);
+        return "admin/editUser";
+    }
 }
