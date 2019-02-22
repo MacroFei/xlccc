@@ -6,9 +6,9 @@ import com.xlccc.ssm.util.Page;
 import java.util.List;
 
 public interface UserMapper {
-    public List<User> list(Page page);
+    public List<User> list();
 
-    public int total();
+//    public int total();
 
     void add (User user );
 

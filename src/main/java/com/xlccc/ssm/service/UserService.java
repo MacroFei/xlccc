@@ -6,15 +6,14 @@ import com.xlccc.ssm.util.Page;
 import java.util.List;
 
 public interface UserService {
-    List<User> list(Page page);
+    List<User> list();
 
-    int total();
 
     void add(User user);
 
-    void delete (int id );
+    void delete(int id);
 
-    User get(int id );
+    User get(int id);
 
     void update(User user);
 }

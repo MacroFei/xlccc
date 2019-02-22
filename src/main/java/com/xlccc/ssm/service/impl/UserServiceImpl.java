@@ -13,20 +13,13 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
-//    @Override
-//    public List<User> list() {
-//        return userMapper.list();
-//    }
+
 
     @Override
-    public List<User> list(Page page) {
-        return userMapper.list(page);
+    public List<User> list() {
+        return userMapper.list();
     }
 
-    @Override
-    public int total() {
-        return userMapper.total();
-    }
 
     @Override
     public void add(User user) {

@@ -6,13 +6,8 @@
 
     <select id="list" resultType="User">
         select * from   user         order by id desc
-        <if test="start!=null and count!=null">
-            limit #{start},#{count}
-        </if>
     </select>
-    <select id="total" resultType="int">
-         select count(*) from user
-    </select>
+
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="User">
         INSERT into user ( name ) values ( #{name} )
     </insert>

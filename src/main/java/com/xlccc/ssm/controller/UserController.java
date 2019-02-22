@@ -1,5 +1,7 @@
 package com.xlccc.ssm.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xlccc.ssm.pojo.User;
 import com.xlccc.ssm.service.UserService;
 import com.xlccc.ssm.util.ImageUtil;
@@ -26,13 +28,20 @@ public class UserController {
 
     @RequestMapping("admin_user_list")
     public String list(Model model, Page page) {
-        List<User> us = userService.list(page);
-        int total = userService.total();
+        PageHelper.offsetPage(page.getStart(),page.getCount());
+        List<User> us=userService.list();
+        int total = (int) new PageInfo<>(us).getTotal();
         page.setTotal(total);
-        model.addAttribute("us", us);
-        model.addAttribute("page", page);
-
+        model.addAttribute("us",us);
+        model.addAttribute("page",page);
         return "admin/listUser";
+//        List<User> us = userService.list(page);
+//        int total = userService.total();
+//        page.setTotal(total);
+//        model.addAttribute("us", us);
+//        model.addAttribute("page", page);
+//
+//        return "admin/listUser";
     }
 
     @RequestMapping("admin_user_add")
