@@ -35,6 +35,7 @@ public class UserController {
         model.addAttribute("us",us);
         model.addAttribute("page",page);
         return "admin/listUser";
+
 //        List<User> us = userService.list(page);
 //        int total = userService.total();
 //        page.setTotal(total);
