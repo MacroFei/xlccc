@@ -28,12 +28,12 @@ public class UserController {
 
     @RequestMapping("admin_user_list")
     public String list(Model model, Page page) {
-        PageHelper.offsetPage(page.getStart(),page.getCount());
-        List<User> us=userService.list();
+        PageHelper.offsetPage(page.getStart(), page.getCount());
+        List<User> us = userService.list();
         int total = (int) new PageInfo<>(us).getTotal();
         page.setTotal(total);
-        model.addAttribute("us",us);
-        model.addAttribute("page",page);
+        model.addAttribute("us", us);
+        model.addAttribute("page", page);
         return "admin/listUser";
 
 //        List<User> us = userService.list(page);
@@ -80,9 +80,9 @@ public class UserController {
 
         userService.update(u);
         MultipartFile image = uploadedImageFile.getImage();
-        if (null != image && !image.isEmpty()){
+        if (null != image && !image.isEmpty()) {
             File imageFolder = new File(session.getServletContext().getRealPath("img/user"));
-            File file = new File(imageFolder,u.getId()+".jpg");
+            File file = new File(imageFolder, u.getId() + ".jpg");
             try {
                 image.transferTo(file);
             } catch (IOException e) {
@@ -91,7 +91,7 @@ public class UserController {
             }
             BufferedImage img = ImageUtil.change2jpg(file);
             try {
-                ImageIO.write(img,"jpg",file);
+                ImageIO.write(img, "jpg", file);
             } catch (IOException e) {
                 System.out.print("文件上传错误");
                 e.printStackTrace();
