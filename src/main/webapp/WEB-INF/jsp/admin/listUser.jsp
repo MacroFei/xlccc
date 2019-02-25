@@ -16,6 +16,7 @@
         div {
             align: "center";
         }
+
     </style>
     <%--<script>--%>
     <%--function checkEmpty(id, name){--%>
