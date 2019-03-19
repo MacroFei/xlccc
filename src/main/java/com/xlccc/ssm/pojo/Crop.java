@@ -1,6 +1,6 @@
 package com.xlccc.ssm.pojo;
 
-public class Data {
+public class Crop {
     private Integer id;
 
     private String variety;
@@ -20,18 +20,6 @@ public class Data {
     private String city;
 
     private String district;
-//额外
-    private String checkbox;
-
-    public String getCheckbox() {
-        return checkbox;
-    }
-
-
-
-    public void setCheckbox(String checkbox) {
-        this.checkbox = checkbox;
-    }
 
     public Integer getId() {
         return id;
