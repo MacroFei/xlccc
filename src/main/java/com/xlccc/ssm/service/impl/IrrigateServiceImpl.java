@@ -16,7 +16,7 @@ public class IrrigateServiceImpl  implements IrrigateService{
     @Override
     public List<Irrigate> list() {
         IrrigateExample example = new IrrigateExample();
-        example.setOrderByClause("id desc");
+        example.setOrderByClause("id asc");
         return irrigateMapper.selectByExample(example);
     }
 

@@ -70,4 +70,18 @@ public class UserController {
         return "redirect:/user_list";
     }
 
+
+    @RequestMapping("user_update_password")
+    public String updatePassword(User user) {
+        System.out.print("idasdasda:" + user.getPasswordId());
+
+        User u = userService.get(user.getPasswordId());
+        if (u.getPassword().equals(user.getPassword())) {
+            u.setPassword(user.getNewPassword());
+            userService.update(u);
+        }
+
+        return "redirect:/user_list";
+    }
+
 }

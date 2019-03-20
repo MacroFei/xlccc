@@ -81,3 +81,35 @@
 			background-color: #46b8da;
 			border-radius: 5px;
 		} 
+
+
+		.reveal-modal-2 {
+			visibility: hidden;
+			top: 100px; 
+			left: 60%;
+			margin-left: -300px;
+			width: 520px;
+			background: #ffffff url(modal-gloss.png) no-repeat -200px -80px;
+			position: absolute;
+			z-index: 101;
+			padding: 20px 25px 30px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
+			-webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
+			-box-shadow: 0 0 10px rgba(0,0,0,.4);
+			}
+	
+		.reveal-modal-2 .close-reveal-modal-2 {
+			font-size: 18px;
+			width: 4em;
+			height: 2em;
+			line-height: 1;
+			color: #ffffff;
+			text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+			cursor: pointer;
+			margin-left: 0.5em;
+			background-color: #46b8da;
+			border-radius: 5px;
+		} 

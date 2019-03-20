@@ -37,12 +37,11 @@
                 }
             }
             ids = ids.substring(0, ids.length - 1);
-            alert("hello" + ids);
+           // alert("hello" + ids);
             if (ids == '') return;
             location.href = '${pageContext.request.contextPath}/crop_deleteAll?ids=' + ids;
         }
     </script>
-
 
 </head>
 
@@ -52,7 +51,7 @@
     <div class="headerwrapper">
         <div class="header-left">
             <a href="index.html" class="logo">
-                <h4 style="color: #fff;">智能灌溉管理系统后台kkk</h4>
+                <h4 style="color: #fff;">智能灌溉管理系统后台</h4>
             </a>
         </div><!-- header-left -->
         <div class="header-right">
@@ -88,31 +87,32 @@
 
 
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="../index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
                 <li class="parent active"><a href="#"><i class="fa fa-suitcase"></i> <span>数据管理</span></a>
                     <ul class="children">
-                        <li class="active"><a href="data-management.html">农作物信息查看</a></li>
+                        <li class="active"><a href="crop_list">农作物信息查看</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-edit"></i> <span>设备管理</span></a>
                     <ul class="children">
-                        <li><a href="equipment-management.html">分类管理</a></li>
+                        <li><a href="equipment_list">分类管理</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-bars"></i> <span>灌溉管理</span></a>
                     <ul class="children">
-                        <li><a href="irrigation-management.html">灌溉设置</a></li>
+                        <li><a href="irrigate_list">灌溉设置</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-file-text"></i> <span>用户管理</span></a>
                     <ul class="children">
-                        <li><a href="user-management.html">管理员管理</a></li>
+                        <li><a href="user_list">管理员管理</a></li>
                     </ul>
                 </li>
 
             </ul>
 
-        </div><!-- leftpanel -->
+        </div>
+        <!-- leftpanel -->
 
         <!--body wrapper start-->
         <div class="wrapper" style="min-height: 582px;">
@@ -151,13 +151,13 @@
 
             <div style="height: 3em;width: 95%;margin-top: -4em;margin-bottom: 2em;margin-left: 2.5%;line-height: 3em;background-color: #f5fafe;">
                 <p style="float:left;margin-left: 2em;">共有数据：${totalNumber}条</p>
-                <button href="data_delete" class="btn btn-danger" style="margin-left: 60em;">批量删除</button>
+                <button class="btn btn-danger" style="margin-left: 60em;">批量删除</button>
             </div>
 
             <table id="tb" class="table table-bordered table-striped" style="width: 90%;margin-left: 5%;">
                 <tr>
                     <td>
-                        <input type="checkbox" onclick="allChecked(this)"/>全选
+                        <input type="checkbox"  value="${c.id}" class="inp"/>
                     </td>
                     <td>ID</td>
                     <td>品种</td>
@@ -201,113 +201,23 @@
                                     <p style="margin-bottom: 20px;">所属公司：${c.company}</p>
                                     <button type="button" class="close-reveal-modal">返回</button>
                                 </div>
-
                             </td>
                             <td>
-                            <td>
-                                <a href="crop_edit?id=${c.id}"><img src="images/editor.png" alt="编辑信息"
-                                                                    style="margin-right:8px;"></a>
-
+                                <a href="crop_edit?id=${c.id}" class="big-link" data-toggle="modal"
+                                   data-target="#addUserModal"><img
+                                        src="images/editor.png" alt="编辑信息" style="margin-right:8px;"
+                                        onclick="javascript:location.href='crop_edit?id=${c.id}'"></a>
                                 <a href="crop_delete?id=${c.id}" onclick="return confirm('请确认删除');"><img
-                                        src="images/delete.png" alt="删除" style="margin-left:8px;"></a>
+                                        src="images/delete.png" alt="删除"
+                                        style="margin-left:8px;"></a>
                             </td>
                         </tr>
+
                     </c:forEach>
 
-                    <button type="submit" onclick="deleteAllData()">批量删除Demo</button>
+                    <button type="button" onclick="deleteAllData()">批量删除Demo</button>
                 </form>
-
-
             </table>
-
-            <%--<button href="data_delete" class="btn btn-danger" style="margin-left: 60em;">批量删除</button>--%>
-
-
-            <!-- 模态框示例（Modal） -->
-            <form method="post" action="data_add?id=1" class="form-horizontal" role="form" id="form_data"
-                  onsubmit="return check_form()" style="margin: 20px;">
-                <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    编辑信息
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" role="form">
-
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -2.5em;margin-top: 2em;">品种：</label>
-                                        <div class="col-sm-9" style="margin-top: 1.5em;">
-                                            <input type="text" class="form-control" id="data_id" name="data_id">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -2.5em;margin-top: 1em;">温度：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">20 ℃</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -2.5em;margin-top: 1em;">湿度：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">70％</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -2.5em;margin-top: 1em;">CO2：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">70 ìl/L</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -2.5em;margin-top: 1em;">光照：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">40000lx</p>
-                                    </div>
-
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">所属区域：</label>
-                                        <div class="col-sm-9" style="margin-top: 1em;">
-                                            <input type="text" class="form-control" id="data_province"
-                                                   name="data_province" style=" width: 85px;">
-                                            <p style="line-height: 2.5em;margin-top: -2.5em;margin-right: 12em;">省</p>
-                                            <input type="text" class="form-control" id="data_city" name="data_city"
-                                                   style=" width: 85px;margin-top: -3.8em;margin-left: 10em;">
-                                            <p style="line-height: 2.5em;margin-top: -2.5em;margin-left: 2.5em;">市</p>
-                                            <input type="text" class="form-control" id="data_district"
-                                                   name="data_district"
-                                                   style=" width: 85px;margin-top: -3.8em;margin-left: 20em;">
-                                            <p style="line-height: 2.5em;margin-top: -2.5em;margin-left: 17em;">区</p>
-                                        </div>
-                                        <h1>helloasdasd asd </h1>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">所属公司：</label>
-                                        <div class="col-sm-9" style="margin-top: 1em;">
-                                            <input type="text" class="form-control" id="data_company"
-                                                   name="data_company">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer" style="height: 6em;">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"
-                                        style="margin-top: -10em;">关闭
-                                </button>
-                                <button type="submit" class="btn btn-success" style="margin-top: -10em;">提交</button>
-                                <span id="tip"> </span>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-            </form>
 
 
             <nav>

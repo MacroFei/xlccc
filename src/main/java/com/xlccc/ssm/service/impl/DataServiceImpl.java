@@ -16,7 +16,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public List<Data> list() {
         DataExample example = new DataExample();
-        example.setOrderByClause("id asc");
+        example.setOrderByClause("id desc");
         return dataMapper.selectByExample(example);
     }
 

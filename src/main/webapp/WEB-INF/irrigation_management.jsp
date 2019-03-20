@@ -31,7 +31,6 @@
     <script type="text/javascript" src="js/jedate.js"></script>
     <link type="text/css" rel="stylesheet" href="css/jeDate-test.css">
     <link type="text/css" rel="stylesheet" href="css/jedate.css">
-
     <script>
 
         function deleteAllData() {
@@ -93,24 +92,24 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
-                <li class="parent"><a href="#"><i class="fa fa-suitcase"></i> <span>数据管理</span></a>
+                <li class="parent active"><a href="#"><i class="fa fa-suitcase"></i> <span>数据管理</span></a>
                     <ul class="children">
-                        <li><a href="data-management.html">农作物信息查看</a></li>
+                        <li class="active"><a href="crop_list">农作物信息查看</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-edit"></i> <span>设备管理</span></a>
                     <ul class="children">
-                        <li><a href="equipment-management.html">分类管理</a></li>
+                        <li><a href="equipment_list">分类管理</a></li>
                     </ul>
                 </li>
-                <li class="parent active"><a href="#"><i class="fa fa-bars"></i> <span>灌溉管理</span></a>
+                <li class="parent"><a href="#"><i class="fa fa-bars"></i> <span>灌溉管理</span></a>
                     <ul class="children">
-                        <li class="active"><a href="irrigation-management.html">灌溉设置</a></li>
+                        <li><a href="irrigate_list">灌溉设置</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-file-text"></i> <span>用户管理</span></a>
                     <ul class="children">
-                        <li><a href="user-management.html">管理员管理</a></li>
+                        <li><a href="user_list">管理员管理</a></li>
                     </ul>
                 </li>
 
@@ -173,6 +172,7 @@
                     <td>数据</td>
                     <td>操作</td>
                 </tr>
+
                 <form action="irrigate_list" method="post">
                     <c:forEach items="${is}" var="i">
                         <tr>
@@ -196,7 +196,7 @@
                                     <p>设备编号：${i.serial_number}</p>
                                     <p>所属大棚：${i.greenhouse}</p>
                                     <p>定时：星期一 - 12：00~59：00</p>
-                                    <p>工作状态：正常</p>
+                                    <p>工作状态：${i.working_condition}</p>
                                     <p>阀门数量：2</p>
                                     <p>灌溉时间：60分</p>
                                     <p style="margin-bottom: 20px;">所属地区：${i.province}${i.city}${i.district}</p>
@@ -205,8 +205,9 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#" class="big-link" data-toggle="modal" data-target="#addUserModal"><img
-                                        src="images/editor.png" alt="编辑信息" style="margin-right:8px;"></a>
+                                <a href="" class="big-link" data-toggle="modal" data-target="#addUserModal"><img
+                                        src="images/editor.png" alt="编辑信息" style="margin-right:8px;"
+                                        onclick="javascript:location.href='irrigate_edit?id=${i.id}'"></a>
                                 <a href="#" class="big-link" data-reveal-id="Modal" data-animation="none"><img
                                         src="images/set-up.png" alt="设置" style="margin-left:8px;"></a>
                                 <div id="Modal" class="reveal-modal-1">
@@ -247,93 +248,9 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <button type="submit" onclick="deleteAllData()">批量删除Demo</button>
+                    <button type="button" onclick="deleteAllData()">批量删除Demo</button>
                 </form>
             </table>
-            <script>
-                function allChecked(ck) {
-                    var is = document.getElementsByClassName("inp");
-                    for (var i = 0; i <= is.length; i++) {
-                        is[i].checked = ck.checked;
-                    }
-                }
-            </script>
-
-            <!-- 模态框（Modal） -->
-            <form method="post" action="" class="form-horizontal" role="form" id="form_data"
-                  onsubmit="return check_form()" style="margin: 20px;">
-                <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    编辑信息
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 2em;">设备编号：</label>
-                                        <div class="col-sm-9" style="margin-top: 1.5em;">
-                                            <input type="text" class="form-control" id="user_id" name="user_id">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 2em;">所属大棚：</label>
-                                        <div class="col-sm-9" style="margin-top: 1.5em;">
-                                            <input type="text" class="form-control" id="user_id" name="user_id">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -3.5em;margin-top: 1em;">定时：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">星期一 - 12：00~59：00</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">工作状态：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">正常</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="lastname" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">阀门数量：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">2</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">灌溉时间：</label>
-                                        <p style="line-height: 2em;margin-top: 1em;float: left;">60分</p>
-                                    </div>
-                                    <div class="form-group" style="margin-top: 0em;margin-bottom: 0em;">
-                                        <label for="user_id" class="col-sm-3 control-label"
-                                               style="line-height: 1em;margin-left: -1.5em;margin-top: 1em;">所属区域：</label>
-                                        <div class="col-sm-9" style="margin-top: 1em;">
-                                            <input type="text" class="form-control" id="user_id" name="user_id">
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                            <div class="modal-footer" style="height: 5em;">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"
-                                        style="margin-top: -10em;">关闭
-                                </button>
-                                <button type="submit" class="btn btn-success" style="margin-top: -10em;">提交</button>
-                                <span id="tip"> </span>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-            </form>
-
-
             <nav>
                 <ul class="pagination">
                     <li>
@@ -367,6 +284,7 @@
                     </li>
                 </ul>
             </nav>
+
 
         </div>
         <!-- End Wrapper-->
@@ -403,4 +321,3 @@
 <script src="js/dashboard.js"></script>
 </body>
 </html>
-

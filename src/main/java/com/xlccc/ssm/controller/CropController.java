@@ -65,7 +65,7 @@ public class CropController {
                 ) {
             int id = Integer.parseInt(idDemo);
             cropService.delete(id);
-
+            System.out.print("ashjiodjaios+删除成功");
         }
         return "redirect:/crop_list";
     }

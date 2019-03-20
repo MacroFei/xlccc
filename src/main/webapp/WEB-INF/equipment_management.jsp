@@ -40,6 +40,7 @@
             // alert("hello" + ids);
             if (ids == '') return;
             location.href = '${pageContext.request.contextPath}/equipment_deleteAll?ids=' + ids;
+            <%--window.location.href = '${pageContext.request.contextPath}/equipment_deleteAll?ids='+ ids;--%>
         }
     </script>
 </head>
@@ -86,24 +87,24 @@
 
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
-                <li class="parent"><a href="#"><i class="fa fa-suitcase"></i> <span>数据管理</span></a>
+                <li class="parent active"><a href="#"><i class="fa fa-suitcase"></i> <span>数据管理</span></a>
                     <ul class="children">
-                        <li><a href="data-management.html">农作物信息查看</a></li>
+                        <li class="active"><a href="crop_list">农作物信息查看</a></li>
                     </ul>
                 </li>
-                <li class="parent active"><a href="#"><i class="fa fa-edit"></i> <span>设备管理</span></a>
+                <li class="parent"><a href="#"><i class="fa fa-edit"></i> <span>设备管理</span></a>
                     <ul class="children">
-                        <li class="active"><a href="equipment-management.html">分类管理</a></li>
+                        <li><a href="equipment_list">分类管理</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-bars"></i> <span>灌溉管理</span></a>
                     <ul class="children">
-                        <li><a href="irrigation-management.html">灌溉设置</a></li>
+                        <li><a href="irrigate_list">灌溉设置</a></li>
                     </ul>
                 </li>
                 <li class="parent"><a href="#"><i class="fa fa-file-text"></i> <span>用户管理</span></a>
                     <ul class="children">
-                        <li><a href="user-management.html">管理员管理</a></li>
+                        <li><a href="user_list">管理员管理</a></li>
                     </ul>
                 </li>
 
@@ -162,8 +163,7 @@
                     <td>数据</td>
                     <td>操作</td>
                 </tr>
-
-                <form action="equipment_deleteAll" method="post">
+                <form action="#" method="post">
 
                     <c:forEach items="${es}" var="e">
                         <tr>
@@ -193,28 +193,18 @@
                                     <button type="button" class="close-reveal-modal">返回</button>
                                 </div>
                             </td>
-
-
                             <td>
-                                <a href="equipment_edit?id=${e.id}"><img src="images/editor.png" alt="编辑信息"
-                                                                         style="margin-right:8px;"></a>
-                                <a href="equipment_delete?id=${e.id}" onclick="return confirm('请确认删除');"><img
-                                        src="images/delete.png" alt="删除" style="margin-left:8px;"></a>
+                                <a href="equipment_edit?id=${e.id}" class="big-link" data-toggle="modal" data-target="#addUserModal"><img
+                                        src="images/editor.png" alt="编辑信息" style="margin-right:8px;"
+                                        onclick="javascript:location.href='equipment_edit?id=${e.id}'"></a>
+                                <a href="equipment_delete?id=${e.id}" onclick="return confirm('请确认删除');"><img src="images/delete.png" alt="删除"
+                                                                                   style="margin-left:8px;"></a>
                             </td>
                         </tr>
                     </c:forEach>
-                    <button type="submit" onclick="deleteAllData()">批量删除Demo</button>
+                    <button type="button" onclick="deleteAllData()">批量删除Demo</button>
                 </form>
             </table>
-
-            <script>
-                function allChecked(ck) {
-                    var is = document.getElementsByClassName("inp");
-                    for (var i = 0; i <= is.length; i++) {
-                        is[i].checked = ck.checked;
-                    }
-                }
-            </script>
 
 
             <nav>
@@ -250,6 +240,7 @@
                     </li>
                 </ul>
             </nav>
+
 
         </div>
         <!-- End Wrapper-->

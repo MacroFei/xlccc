@@ -7,11 +7,33 @@ public class User {
 
     private String sex;
 
-    private Integer phone;
+    private String phone;
 
     private String email;
 
     private String area;
+
+    private String password;
+
+    private int passwordId;  //额外
+
+    private String newPassword; //额外
+
+    public int getPasswordId() {
+        return passwordId;
+    }
+
+    public void setPasswordId(int passwordId) {
+        this.passwordId = passwordId;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 
     public Integer getId() {
         return id;
@@ -37,12 +59,12 @@ public class User {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getEmail() {
@@ -59,5 +81,13 @@ public class User {
 
     public void setArea(String area) {
         this.area = area == null ? null : area.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 }

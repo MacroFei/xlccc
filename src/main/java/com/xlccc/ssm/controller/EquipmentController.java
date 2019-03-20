@@ -1,6 +1,7 @@
 package com.xlccc.ssm.controller;
 
 
+import com.alibaba.druid.pool.vendor.SybaseExceptionSorter;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xlccc.ssm.pojo.Equipment;
@@ -61,8 +62,9 @@ public class EquipmentController {
 
     @RequestMapping("equipment_deleteAll")
     public String deleteAll(String ids ){
+        System.out.print("heloasdkjlaskldjalsdjDeleteAll" + ids);
         for (String idDemo: ids.split(",")
-             ) {
+                ) {
             int id = Integer.parseInt(idDemo);
             equipmentService.delete(id);
 
