@@ -4,6 +4,11 @@
   <resultMap id="BaseResultMap" type="com.xlccc.ssm.pojo.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -35,7 +40,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name
+    id, name, sex, phone, email, area, password
   </sql>
   <select id="selectByExample" parameterType="com.xlccc.ssm.pojo.UserExample" resultMap="BaseResultMap">
     select
@@ -44,7 +49,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from user_demo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -55,42 +60,99 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from user_demo
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from user_demo
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xlccc.ssm.pojo.User" useGeneratedKeys="true">
-    insert into user (name)
-    values (#{name,jdbcType=VARCHAR})
+    insert into user_demo (name, sex, phone, 
+      email, area, password
+      )
+    values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xlccc.ssm.pojo.User" useGeneratedKeys="true">
-    insert into user
+    insert into user_demo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="password != null">
+        password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xlccc.ssm.pojo.User">
-    update user
+    update user_demo
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xlccc.ssm.pojo.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR}
+    update user_demo
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectTotalNumber" parameterType="java.lang.Integer" resultType="Integer">
+    SELECT COUNT(id) FROM user_demo
+  </select>
 </mapper>

@@ -21,4 +21,6 @@
     <update id="update" parameterType="User">
         UPDATE user SET NAME=#{name} where id=#{id}
     </update>
+
+
 </mapper>
