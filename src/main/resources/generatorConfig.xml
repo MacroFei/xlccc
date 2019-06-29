@@ -15,7 +15,11 @@
         </commentGenerator>
 
         <!--数据库链接地址账号密码-->
+<<<<<<< HEAD
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/GFQ_xlccc" userId="root"
+=======
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost/magspace" userId="root"
+>>>>>>> parent of 666edcd... Revert "2019.6.30Android备份"
                         password="admin">
         </jdbcConnection>
         <!--不知道做什么用的。。。反正贴上来了~-->
@@ -46,7 +50,11 @@
             <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
 
         <!--</table>-->
+<<<<<<< HEAD
         <table tableName="user_demo" domainObjectName="User" enableCountByExample="false"
+=======
+        <table tableName="androidpic" domainObjectName="AndroidPic" enableCountByExample="false"
+>>>>>>> parent of 666edcd... Revert "2019.6.30Android备份"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <property name="my.isgen.usekeys" value="true"/>

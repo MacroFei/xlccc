@@ -14,7 +14,11 @@ import java.util.List;
 public class MybatisGenerator {
 
     public static void main(String[] args) throws Exception {
+<<<<<<< HEAD
         String today = "2019-3-20";
+=======
+        String today = "2019-6-26";
+>>>>>>> parent of 666edcd... Revert "2019.6.30Android备份"
 
         SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
         Date now =sdf.parse(today);
