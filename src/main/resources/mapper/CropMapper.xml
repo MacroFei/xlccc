@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlccc.ssm.mapper.CropMapper">
+    <resultMap id="BaseResultMap" type="com.xlccc.ssm.pojo.Crop">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="variety" jdbcType="VARCHAR" property="variety" />
+        <result column="temperayure" jdbcType="INTEGER" property="temperayure" />
+        <result column="humidity" jdbcType="INTEGER" property="humidity" />
+        <result column="co2" jdbcType="INTEGER" property="co2" />
+        <result column="illumination" jdbcType="INTEGER" property="illumination" />
+        <result column="company" jdbcType="VARCHAR" property="company" />
+        <result column="province" jdbcType="VARCHAR" property="province" />
+        <result column="city" jdbcType="VARCHAR" property="city" />
+        <result column="district" jdbcType="VARCHAR" property="district" />
+        <result column="category" jdbcType="VARCHAR" property="category" />
+        <result column="limitMax" jdbcType="INTEGER" property="limitMax" />
+        <result column="limitMin" jdbcType="INTEGER" property="limitMin" />
+        <result column="tag" jdbcType="VARCHAR" property="tag" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, variety, temperayure, humidity, co2, illumination, company, province, city, district,
+        category, limitMax, limitMin, tag, remark
+    </sql>
+    <select id="selectByExample" parameterType="com.xlccc.ssm.pojo.CropExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'false' as QUERYID,
+        <include refid="Base_Column_List" />
+        from crop
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from crop
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from crop
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xlccc.ssm.pojo.Crop" useGeneratedKeys="true">
+        insert into crop (variety, temperayure, humidity,
+        co2, illumination, company,
+        province, city, district,
+        category, limitMax, limitMin,
+        tag, remark)
+        values (#{variety,jdbcType=VARCHAR}, #{temperayure,jdbcType=INTEGER}, #{humidity,jdbcType=INTEGER},
+        #{co2,jdbcType=INTEGER}, #{illumination,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR},
+        #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+        #{category,jdbcType=VARCHAR}, #{limitMax,jdbcType=INTEGER}, #{limitMin,jdbcType=INTEGER},
+        #{tag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xlccc.ssm.pojo.Crop" useGeneratedKeys="true">
+        insert into crop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="variety != null">
+                variety,
+            </if>
+            <if test="temperayure != null">
+                temperayure,
+            </if>
+            <if test="humidity != null">
+                humidity,
+            </if>
+            <if test="co2 != null">
+                co2,
+            </if>
+            <if test="illumination != null">
+                illumination,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="district != null">
+                district,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="limitMax != null">
+                limitMax,
+            </if>
+            <if test="limitMin != null">
+                limitMin,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="variety != null">
+                #{variety,jdbcType=VARCHAR},
+            </if>
+            <if test="temperayure != null">
+                #{temperayure,jdbcType=INTEGER},
+            </if>
+            <if test="humidity != null">
+                #{humidity,jdbcType=INTEGER},
+            </if>
+            <if test="co2 != null">
+                #{co2,jdbcType=INTEGER},
+            </if>
+            <if test="illumination != null">
+                #{illumination,jdbcType=INTEGER},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null">
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="limitMax != null">
+                #{limitMax,jdbcType=INTEGER},
+            </if>
+            <if test="limitMin != null">
+                #{limitMin,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xlccc.ssm.pojo.Crop">
+        update crop
+        <set>
+            <if test="variety != null">
+                variety = #{variety,jdbcType=VARCHAR},
+            </if>
+            <if test="temperayure != null">
+                temperayure = #{temperayure,jdbcType=INTEGER},
+            </if>
+            <if test="humidity != null">
+                humidity = #{humidity,jdbcType=INTEGER},
+            </if>
+            <if test="co2 != null">
+                co2 = #{co2,jdbcType=INTEGER},
+            </if>
+            <if test="illumination != null">
+                illumination = #{illumination,jdbcType=INTEGER},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null">
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="limitMax != null">
+                limitMax = #{limitMax,jdbcType=INTEGER},
+            </if>
+            <if test="limitMin != null">
+                limitMin = #{limitMin,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xlccc.ssm.pojo.Crop">
+    update crop
+    set variety = #{variety,jdbcType=VARCHAR},
+      temperayure = #{temperayure,jdbcType=INTEGER},
+      humidity = #{humidity,jdbcType=INTEGER},
+      co2 = #{co2,jdbcType=INTEGER},
+      illumination = #{illumination,jdbcType=INTEGER},
+      company = #{company,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      limitMax = #{limitMax,jdbcType=INTEGER},
+      limitMin = #{limitMin,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectTotalNumber" parameterType="java.lang.Integer" resultType="Integer">
+  SELECT COUNT(id) FROM crop
+</select>
+
+    <select id="selectTotalNumber_1" parameterType="String" resultType="Integer">
+        SELECT COUNT(id) FROM crop
+        <where>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectTotalNumber_2" parameterType="String" resultType="Integer">
+        SELECT COUNT(id) FROM crop
+        <where>
+            <if test="province!=null and province!='' and province!='kong'">
+                and province = #{province}
+            </if>
+            <if test="city!=null and city!='' and city!='kong'">
+                and city = #{city}
+            </if>
+            <if test="district!=null and district!='' and district!='kong'">
+                and district = #{district}
+            </if>
+            <if test="variety!=null and variety!='' and variety!='kong'">
+                and variety = #{variety}
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSheng" parameterType="String" resultMap="BaseResultMap">
+        select distinct(province) from crop
+        <where>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectShi" parameterType="String" resultMap="BaseResultMap">
+        select distinct(city) from crop
+        <where>
+            <if test="province!=null and province!=''">
+                and province = #{province}
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectQu" parameterType="String" resultMap="BaseResultMap">
+        select distinct(district) from crop
+        <where>
+            <if test="province!=null and province!=''">
+                and province = #{province}
+            </if>
+            <if test="city!=null and city!=''">
+                and city = #{city}
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectName" parameterType="String" resultMap="BaseResultMap">
+        select distinct(variety) from crop
+        <where>
+            <if test="province!=null and province!=''">
+                and province = #{province}
+            </if>
+            <if test="city!=null and city!=''">
+                and city = #{city}
+            </if>
+            <if test="district!=null and district!=''">
+                and district = #{district}
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSSQN" parameterType="String" resultMap="BaseResultMap">
+        select * from crop
+        <where>
+            <if test="province!=null and province!='' and province!='kong'">
+                and province = #{province}
+            </if>
+            <if test="city!=null and city!='' and city!='kong'">
+                and city = #{city}
+            </if>
+            <if test="district!=null and district!='' and district!='kong'">
+                and district = #{district}
+            </if>
+            <if test="variety!=null and variety!='' and variety!='kong'">
+                and variety = #{variety}
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCropByRole" parameterType="String" resultMap="BaseResultMap">
+        select * from crop
+        <where>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteAll" parameterType="java.util.List">
+        delete from crop
+        where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="searchVariety" parameterType="String" resultMap="BaseResultMap">
+        select * from crop
+        <where>
+            <if test="variety!=null and variety!='' and variety!='kong'">
+                and variety like "%"#{variety}"%"
+            </if>
+            <if test="category!=null and category!=''">
+                and category = #{category}
+            </if>
+        </where>
+    </select>
+</mapper>
